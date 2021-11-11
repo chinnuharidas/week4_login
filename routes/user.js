@@ -10,17 +10,14 @@ var verifyLogin = (req, res, next) => {
 	}
 }
 
-router.get('/', async (req, res, next) => {
+router.get('/', (req, res) => {
 	var user = req.session.user;
-	var cartCount = null
 	if (req.session.user) {
-		cartCount = 0
-		products = []
-		res.render('user/view-products', { products, user, cartCount })
+		res.render('user/home', { user })
 	} else {
 		res.redirect('/login')
 	}
-});
+})
 
 router.get('/login', (req, res) => {
 	if (req.session.user) {
